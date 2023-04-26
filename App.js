@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState } from 'react'
 import {
   View,
   ScrollView,
@@ -6,14 +6,12 @@ import {
   RefreshControl,
   StatusBar,
   Dimensions,
-  Text,
-  Button
+  Text
 } from 'react-native'
 import Header from './components/header/header'
 import Screener from './components/screener/screener'
 import StokrContext from './context'
 import { nifty50 } from './data'
-import axios from 'axios'
 
 const { width } = Dimensions.get('window')
 
@@ -27,19 +25,6 @@ const App = () => {
   const updateValue = (newValue) => {
     setValue(newValue)
   }
-
-  useEffect(() => {
-    axios
-      .get(
-        'https://api.allorigins.win/raw?url=https://api.tickertape.in/search?text=relia&types=stock,index,etf,mutualfund,space,profile&pageNumber=0'
-      )
-      .then((res) => {
-        console.log(res)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  }, [])
 
   const companyCode = []
 
