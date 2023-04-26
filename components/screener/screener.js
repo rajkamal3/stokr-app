@@ -1,35 +1,8 @@
-import React, { useState, useEffect } from 'react'
-import { Dimensions, ScrollView, StyleSheet, Text, View } from 'react-native'
+import React, { useState, useEffect, useContext } from 'react'
+import { ScrollView, StyleSheet, Text, View } from 'react-native'
 import axios from 'axios'
 
-const { width } = Dimensions.get('window')
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    borderBottomWidth: 1,
-    borderBottomColor: 'black',
-    padding: 5
-  },
-
-  flexParent: {
-    flexDirection: 'row',
-    justifyContent: 'space-between'
-  },
-  flexChildren: {
-    width: width * 0.25
-    // backgroundColor: 'red'
-  },
-  boldText: {
-    fontWeight: 'bold'
-  },
-  flexChildrenContent: {
-    width: width * 0.75
-    // backgroundColor: 'green'
-  }
-})
-
-function Screener({ code }) {
+function Screener({ code, width }) {
   const [marketData, setMarketData] = useState([])
 
   useEffect(() => {
@@ -38,7 +11,38 @@ function Screener({ code }) {
       .then((res) => {
         setMarketData(res.data)
       })
+      .catch((err) => {
+        console.log(err)
+      })
   }, [setMarketData])
+
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      borderBottomWidth: 1,
+      borderBottomColor: 'black',
+      padding: 5
+    },
+
+    flexParent: {
+      flexDirection: 'row',
+      justifyContent: 'space-between'
+    },
+    flexChildren: {
+      width: width * 0.25
+    },
+    boldText: {
+      fontWeight: 'bold'
+    },
+    flexChildrenContent: {
+      width: width * 0.75
+    },
+    button: {
+      width: 100,
+      height: 30,
+      backgroundColor: 'red'
+    }
+  })
 
   const findDifferenceFrom52WLow = (currentPrice, _52WLow) => {
     const priceDifference = currentPrice - _52WLow
