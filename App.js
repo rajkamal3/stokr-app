@@ -54,6 +54,7 @@ const App = () => {
   return (
     <StokrContext.Provider value={{ value, updateValue }}>
       <ScrollView
+        keyboardShouldPersistTaps="handled"
         style={styles.container}
         refreshControl={
           <RefreshControl
@@ -65,7 +66,10 @@ const App = () => {
         <View style={styles.mainContent}>
           <Text>{value}</Text>
 
-          <Header style={styles.header} />
+          <Header
+            style={styles.header}
+            width={width}
+          />
 
           {companyCode.map((code) => {
             return (
